@@ -38,7 +38,11 @@ h1 {
 }
 
 .paragraph:last-child {
-  margin-bottom: 200px;
+  margin-bottom: 50px;
+}
+
+hr {
+  border: 1px solid #c5c6d0;
 }
 
 .social-links {
@@ -73,3 +77,29 @@ h1 {
     padding: 20px;
   }
 }
+
+.post-year {
+  grid-area: post-year;
+  color: #666;
+}
+
+.post-title {
+  grid-area: post-title;
+}
+
+.post-date {
+  grid-area: post-date;
+  text-align: right;
+  color: #666;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "post-year post-title post-date";
+  margin-bottom: 150px;
+}
+
+/* .post-date { */
+/*   text-align: right; */
+/* } */
