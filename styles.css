@@ -89,7 +89,8 @@ h4 {
 .thin-line {
   border: none;
   height: 1px;
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
+  background-color: #666;
   margin: 20px 0;
 }
 
