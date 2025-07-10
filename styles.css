@@ -134,6 +134,12 @@ figcaption {
   color: #a3a3a2;
 }
 
+.paragraph a {
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
 @media screen and (min-width: 760px) and (max-width: 1023px) {
   body {
     margin: 30px;
