@@ -17,6 +17,7 @@ body {
 .container {
   max-width: 600px;
   padding: 30px;
+  width: 100%;
 }
 
 header {
@@ -98,12 +99,12 @@ figcaption {
 
 @media screen and (max-width: 767px) {
   body {
-    margin: 20px;
+    margin: 10px;
     font-size: 14px;
   }
 
   .container {
-    padding: 20px;
+    padding: 15px;
   }
 
   ol,
