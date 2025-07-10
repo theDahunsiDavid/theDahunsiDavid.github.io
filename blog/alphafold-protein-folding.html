@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Protein Mystery: How AlphaFold2 Solved Biology's Toughest Puzzle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="blog-post-header">
+        <h1 class="blog-post-title">
+          The Protein Mystery: How AlphaFold2 Solved Biology's Toughest Puzzle
+        </h1>
+        <p class="last-updated">Updated July 10, 2025</p>
+      </header>
+
+      <section class="introduction">
+        <h2 class="section-h2">Introduction</h2>
+        <article class="paragraph">
+          Proteins are very important to life. They play a crucial role in almost all biological
+          processes in living cells, from immune defense to metabolism. However, little is known
+          about how most proteins are built or how they function. Luckily, the structure of a
+          protein reveals how it works, so being able to determine a protein’s structure from its
+          amino acid sequence is very important.
+        </article>
+        <article class="paragraph">
+          Experimental methods to decode protein structure take months to years, need huge financial
+          investment, and require highly specialized equipment and trained personnel. This is why,
+          in the last 50 years, the structure of only about 200,000 proteins has been determined out
+          of millions of known protein sequences. In the pivotal study titled “<bold
+            >Highly accurate protein structure prediction with AlphaFold</bold
+          >
+          >,” Google DeepMind assembled a talented team to solve this 50-year-old problem
+          computationally, with machine learning, rather than experimentally. This blog post exposes
+          the brilliant methodologies the AlphaFold team used, their amazing results, and its
+          implications to the field of precision medicine.
+        </article>
+      </section>
+      <section class="background">
+        <h2 class="section-h2">Background</h2>
+        <article class="paragraph">
+          To get the 3D structure of one protein, it takes significant time and painstaking efforts
+          using experimental methods like X-ray crystallography. The 3D structure has to be
+          physically measured, atom by atom, with special preparation and equipment in a lab. It can
+          take weeks to months or even years.
+        </article>
+        <article class="paragraph">
+          In hopes of finding a faster way, researchers have explored computational methods:
+          template-based models use already-folded proteins that are similar to the protein for
+          prediction; physics-based simulations use the laws of physics (like bond angles and atom
+          positions) for prediction; and co-evolutionary methods find and use patterns from protein
+          sequences across species for prediction.
+        </article>
+        <article class="paragraph">
+          Still, template-based modelling fails when there’s no already-folded protein that’s
+          similar. Physics simulations require a lot of computational power, that it’s practically
+          impossible and slow to run, and co-evolutionary methods result in incomplete structures
+          due to few patterns being found.
+        </article>
+        <article class="paragraph">
+          The DeepMind study aimed to weld aspects of previous computational methods (evolutional,
+          physical, and biological) with machine learning into a deep learning algorithm called
+          AlphaFold. By using machine learning, DeepMind sought to reduce the time that protein
+          folding took from months or years to hours or days. Seeing as misfolded proteins cause
+          diseases like cancer, being able to quickly determine the unknown structure of most
+          proteins at scale can enable large-scale structural bioinformatics to understand diseases
+          better, design more effective drugs that fit each disease, reduce costs, and engineer
+          advanced proteins for biological and industrial uses.
+        </article>
+      </section>
+      <hr />
+      <div class="social-links">
+        <a href="https://x.com/thedahunsidavid" target="_blank" rel="noopener noreferrer">
+          <img src="../x-logo-black.png" alt="X Logo" class="social-logo"
+        /></a>
+        <a href="https://github.com/theDahunsiDavid" target="_blank" rel="noopener noreferrer">
+          <img src="../github-logo-black.png" alt=" GitHub Logo" class="social-logo"
+        /></a>
+      </div>
+    </div>
+  </body>
+</html>
