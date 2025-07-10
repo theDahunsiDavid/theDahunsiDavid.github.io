@@ -34,7 +34,7 @@ h1 {
 }
 
 .blog-post-title {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 600;
 }
 
@@ -64,7 +64,8 @@ ul {
 }
 
 .blog-image {
-  max-width: 600px;
+  max-width: 100%;
+  height: auto;
 }
 
 figcaption {
@@ -97,12 +98,17 @@ figcaption {
 
 @media screen and (max-width: 767px) {
   body {
-    margin: 10px;
+    margin: 20px;
     font-size: 14px;
   }
 
   .container {
     padding: 20px;
+  }
+
+  ol,
+  ul {
+    padding-left: 20px;
   }
 }
 
