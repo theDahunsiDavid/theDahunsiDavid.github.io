@@ -129,6 +129,11 @@ figcaption {
   width: 20px;
 }
 
+.disclaimer {
+  font-size: 14px;
+  color: #666;
+}
+
 @media screen and (min-width: 760px) and (max-width: 1023px) {
   body {
     margin: 30px;
@@ -162,6 +167,10 @@ figcaption {
   ol,
   ul {
     padding-left: 20px;
+  }
+
+  .disclaimer {
+    font-size: 12px;
   }
 }
 
