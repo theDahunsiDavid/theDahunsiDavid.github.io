@@ -30,6 +30,18 @@ header {
 h1 {
   font-size: 21px;
   font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.blog-post-title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+h2,
+h3,
+h4 {
+  margin-bottom: 10px;
 }
 
 .last-updated {
@@ -43,6 +55,22 @@ h1 {
 
 hr {
   border: 1px solid #c5c6d0;
+}
+
+ol,
+ul {
+  padding-left: 50px;
+  margin-bottom: 20px;
+}
+
+.blog-image {
+  max-width: 600px;
+}
+
+figcaption {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 .social-links {
@@ -99,7 +127,3 @@ hr {
   grid-template-areas: "post-year post-title post-date";
   margin-bottom: 150px;
 }
-
-/* .post-date { */
-/*   text-align: right; */
-/* } */

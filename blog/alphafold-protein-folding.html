@@ -34,8 +34,8 @@
           Experimental methods to decode protein structure take months to years, need huge financial
           investment, and require highly specialized equipment and trained personnel. This is why,
           in the last 50 years, the structure of only about 200,000 proteins has been determined out
-          of millions of known protein sequences. In the pivotal study titled “<bold
-            >Highly accurate protein structure prediction with AlphaFold</bold
+          of millions of known protein sequences. In the pivotal study titled “<strong
+            >Highly accurate protein structure prediction with AlphaFold</strong
           >,” Google DeepMind assembled a talented team to solve this 50-year-old problem
           computationally, with machine learning, rather than experimentally. This blog post exposes
           the brilliant methodologies the AlphaFold team used, their amazing results, and its
@@ -52,10 +52,11 @@
         </article>
         <article class="paragraph">
           In hopes of finding a faster way, researchers have explored computational methods:
-          template-based models use already-folded proteins that are similar to the protein for
-          prediction; physics-based simulations use the laws of physics (like bond angles and atom
-          positions) for prediction; and co-evolutionary methods find and use patterns from protein
-          sequences across species for prediction.
+          <strong>template-based models</strong> use already-folded proteins that are similar to the
+          protein for prediction; <strong>physics-based simulations</strong> use the laws of physics
+          (like bond angles and atom positions) for prediction; and
+          <strong>co-evolutionary methods</strong> find and use patterns from protein sequences
+          across species for prediction.
         </article>
         <article class="paragraph">
           Still, template-based modelling fails when there’s no already-folded protein that’s
@@ -77,51 +78,302 @@
       <section class="methodology">
         <h2 class="section-h2">Methodology</h2>
         <h3 class="section-h3">CASP-14</h3>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <article class="paragraph">
+          Scientists often advertise protein structures they’re solving, experimentally, through the
+          Critical Assessment of Protein Structure Prediction (CASP) competition.
+        </article>
+        <article class="paragraph">
+          While scientists solve these structures, teams attempt to computationally solve the
+          structures in parallel. The team with structures most similar to scientists’ solved
+          structures wins. AlphaFold2 entered the 14th CASP competition.
+        </article>
+        <h3 class="section-h3">The AlphaFold2 Algorithm</h3>
+        <h4 class="section-h4">Data Inputs</h4>
+        <article class="paragraph">
+          This algorithm’s core inputs are from these:
+          <ol>
+            <li>
+              <strong>Target sequence</strong>: Amino acid sequence of the protein to be folded.
+            </li>
+            <li>
+              <strong>Multiple Sequence Alignment (MSA)</strong>: Similar amino acid sequences from
+              various organisms, in a 3D matrix.
+            </li>
+            <li>
+              <strong>Templates</strong>: Known (folded) structures of homologous proteins (proteins
+              similar to the target sequence).
+            </li>
+          </ol>
+        </article>
+        <h4 class="section-h4">AlphaFold2 Network</h4>
+        <article class="paragraph">
+          <ol>
+            <li>
+              <p>
+                <strong>Preprocessing</strong>: The target sequence is used to search genomic
+                databases, to generate the MSA and find homologous templates. These
+                <strong>construct the MSA and pair representation</strong>.
+              </p>
+              <br />
+              <p>
+                A pair representation is a 2D matrix containing information about the relationship
+                between any two residues (residues are amino acids in a protein that are linked in a
+                chain).
+              </p>
+            </li>
+            <li>
+              <strong>Evoformer Module</strong>: Enriches the MSA and pair representation through
+              <strong>48 iterations</strong>, where the output of one iteration is the input for the
+              next iteration. It uses two machine learning architectures: transformer and attention.
+            </li>
+            <li>
+              <strong>Structure Module</strong>: Uses the enriched MSA and pair representation to
+              <strong>build and refine the predicted 3D structure</strong> of the protein in
+              <strong>8 iterations</strong>. The output of one iteration is the input for the next
+              iteration. Also, attention mechanism was creatively applied to 3D space here.
+            </li>
+          </ol>
+        </article>
+        <h3 class="section-h3">Evaluation Metrics</h3>
+        <article class="paragraph">
+          <ol>
+            <li>
+              <strong>Global Distance Test - Total Score (GDT_TS)</strong>: Estimates how many amino
+              acids in the prediction are where they should be.
+            </li>
+            <li>
+              <strong>Local Distance Difference Test (lDDT)</strong>: Checks if distances between
+              nearby atoms are as they should be.
+            </li>
+            <li>
+              <strong>Template Modeling Score</strong>: Tells how similar a prediction is to the
+              original structure.
+            </li>
+            <li>
+              <strong>Root Mean Square Deviation (RMSD)</strong>: Measures the average amount of
+              error in amino acid positions.
+            </li>
+          </ol>
+        </article>
       </section>
       <section class="results">
         <h2 class="section-h2">Results</h2>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <h3 class="section-h3">Superior Accuracy</h3>
+        <article class="paragraph">
+          The backbone of a protein is the chain that holds its amino acids together.
+        </article>
+        <article class="paragraph">
+          AlphaFold2’s <strong>backbone prediction had an average error of 0.96 Å RMSD</strong>. For
+          context, a standard carbon atom’s width is approximately 1.4 Å. This means AlphaFold2’s
+          backbone prediction <strong>error rate is less than the width of a tiny atom</strong>!
+        </article>
+        <figure>
+          <img
+            class="blog-image"
+            src="alphafold2-backbone-accuracy.png"
+            alt="Median backbone accuracy of AlphaFold2 relative to the top 15 entries (out of 146 entries)"
+          />
+          <figcaption>
+            <strong>Figure 1a</strong>: AlphaFold2's backbone prediction accuracy compared to top
+            CASP14 teams (median with 95% CIs). Credit: Jumper et al., Nature (2021). CC BY 4.0.
+            https://www.nature.com/articles/s41586-021-03819-2
+          </figcaption>
+        </figure>
+        <br />
+        <article class="paragraph">
+          For atoms, AlphaFold2 had an <strong>all-atom accuracy of 1.5 Å</strong>. That is, if you
+          measure every single atom, AlphaFold2 may only be off by, roughly, the width of one atom.
+          The next best team’s all-atom accuracy was 3.5 Å.
+        </article>
+        <figure>
+          <img
+            class="blog-image"
+            src="alphafold2-all-atom-accuracy.png"
+            alt="Median all-atom RMSD95 of AlphaFold2 relative to the top 15 entries (out of 145 entries)"
+          />
+          <figcaption>
+            <strong>Figure 1b</strong>: AlphaFold2's all-atom accuracy compared to top CASP14 teams
+            (median with 95% CIs). Credit: Jumper et al., Nature (2021). CC BY 4.0.
+            https://www.nature.com/articles/s41586-021-03819-2
+          </figcaption>
+        </figure>
+        <br />
+        <article class="paragraph">
+          Also, if AlphaFold2’s backbone prediction is very accurate, it allows for high accuracy in
+          the side chains too.
+        </article>
+        <h3 class="section-h3">Reliable and Transferable</h3>
+        <article class="paragraph">
+          AlphaFold2 was given a very long, 2,180 residue, protein to fold. This protein had no
+          similar protein with a known structure, so it was a tough task.
+        </article>
+        <article class="paragraph">
+          AlphaFold2 predicted the protein’s structure with accurate domains (the modules in the
+          protein) and accurate domain-packing (how well the modules fit together in 3D space).
+        </article>
+        <article class="paragraph">
+          It also gave a confidence score for every single amino acid in the protein! DeepMind
+          called this the predicted local-distance difference test (pLDDT). It’s AlphaFold2 saying,
+          “I’m X% confident that this is this amino acid’s correct structure. This pLDDT reliably
+          predicted the Cα local-distance difference test (lDDT-Cα) score, the real accuracy when
+          compared to experimental structures.
+        </article>
+        <article class="paragraph">
+          AlphaFold2 also provided a predicted template modeling score that was reliable.
+        </article>
+        <h3 class="section-h3">Scalable and Novel</h3>
+        <article class="paragraph">
+          AlphaFold2 was trained on some data from the Protein Data Bank (PDB).
+        </article>
+        <article class="paragraph">
+          To test AlphaFold2 more, DeepMind picked whole proteins deposited in the PDB after
+          AlphaFold’s training data cut-off.
+        </article>
+        <article class="paragraph">
+          Despite not being trained on these new structures, AlphaFold2 folded them with high
+          accuracy. It didn’t just cram training data. It actually learned protein folding, a
+          50-year problem.
+        </article>
       </section>
       <section class="discussion">
         <h2 class="section-h2">Discussion</h2>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <h3 class="section-h3">Implications</h3>
+        <article class="paragraph">
+          <ol>
+            <li>
+              <strong>Narrowed sequence-structure gap</strong>: Out of over 200 million known
+              protein sequences, only the structure of about 200,000 proteins had been determined.
+              AlphaFold narrowed this huge gap by predicting over 200 million protein structures.
+            </li>
+            <li>
+              <strong>Advanced biological understanding</strong>: AlphaFold’s reliable protein
+              structures give bioinformaticians the ability to understand how proteins function at
+              an atomic level, thereby deepening our understanding of how many diseases start and
+              progress.
+            </li>
+            <li>
+              <strong>Personalized drug discovery</strong>: With AlphaFold, researchers can predict
+              how specific genetic mutations in each patient’s protein makeup can negatively alter
+              protein structures, and they can proactively design new drugs to overcome them. Being
+              able to reliably predict the structure of viral and bacterial proteins can also be
+              used to design stronger and precise vaccines.
+            </li>
+          </ol>
+        </article>
+        <h3 class="section-h3">Limitations</h3>
+        <article class="paragraph">
+          <ol>
+            <li>
+              <strong>Protein Multimers</strong>: AlphaFold2 was trained on single protein
+              molecules, so it struggled to predict structures for multimers (two or more proteins
+              bound together as one unit).
+            </li>
+            <li>
+              <strong>Intrinsically Disordered Regions (IDRs)</strong>: IDRs are unstable parts of
+              proteins that don't have a fixed 3D structure. Since AlphaFold2 predicts a single,
+              static 3D structure, it gives low-confidence predictions for IDRs.
+            </li>
+            <li>
+              <strong>Structural Changes</strong>: Proteins need to move and change shape to do
+              their jobs. AlphaFold2 takes a snapshot of a protein in one shape, but it doesn't
+              capture the full range of shapes that a protein can take.
+            </li>
+          </ol>
+        </article>
+        <h3 class="section-h3">Future Directions</h3>
+        <article class="paragraph">
+          <ol>
+            <li>
+              <strong>Mutations</strong>: AlphaFold2 can't predict the consequences of mutations to
+              a protein's structure. This is very crucial to understanding diseases and drug
+              resistance, so it’s the next frontier.
+            </li>
+            <li>
+              <strong>Generative AI</strong>: With Gen AI models, we can design protein sequences
+              that fold into desired structures with specific functions. This will be very useful
+              for drug design and even industrial use.
+            </li>
+            <li>
+              <strong>Enhanced Algorithms</strong>: Solving the limitation of structural changes or
+              IDRs might involve combining AlphaFold with other computational methods like molecular
+              dynamics simulations.
+            </li>
+          </ol>
+        </article>
       </section>
       <section class="reflection">
         <h2 class="section-h2">Reflection</h2>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <article class="paragraph">
+          This study is a prime example of how artificial intelligence (AI) and machine learning
+          (ML) can be used to solve critical problems in biological and life sciences.
+        </article>
+        <article class="paragraph">
+          The protein-folding problem was one that many scientists thought conventional computing
+          cannot solve. Quantum mechanics was even considered at a point. However, AI and ML solved
+          it while quantum computers are still years away.
+        </article>
+        <article class="paragraph">
+          AlphaFold2’s speed and accuracy when folding proteins give room for discoveries that were
+          not imaginable a few years ago. We can design tailor-made drugs for genetic disorders
+          faster than ever. We can create very effective vaccines to fight infectious diseases.
+          There has never been a time in human history where humanity's dream of eradicating
+          debilitating diseases felt so close.
+        </article>
+        <article class="paragraph">
+          This is why, as a software developer with an undergraduate degree in Microbiology, I find
+          the prospect of leveraging AI and ML in bioinformatics for the large-scale analysis of
+          protein structures both exciting and promising.
+        </article>
+        <article class="paragraph">
+          Moreover, this study highlights the need for scientists in different disciplines and with
+          expertise in computer science, biology, and physics to collaborate. Modern scientific
+          breakthroughs will require multidisciplinary teams.
+        </article>
       </section>
       <section class="conclusion">
         <h2 class="section-h2">Conclusion</h2>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <article class="paragraph">
+          This study is, no doubt, a breakthrough in protein research. It combines artificial
+          intelligence and machine learning techniques to rapidly predict the structure of proteins.
+          For example, the transformer architecture is the basis of its Evoformer module. It also
+          creatively uses attention mechanisms throughout its entire algorithm.
+        </article>
+        <article class="paragraph">
+          AlphaFold2 offers a dependable, quick, and near-error-free approach to protein-folding.
+          Plus, the outcome of this study will likely transform drug discovery, drug design, and
+          precision medicine. Still, AlphaFold2 is not perfect. It struggles to predict how
+          mutations affect a protein’s structure. It can’t handle structural changes in proteins or
+          intrinsically disordered regions. Fortunately, its limitations define the next frontiers.
+          It has also taught us an important lesson: masterfully integrating artificial
+          intelligence, machine learning, and bioinformatics techniques can drive real progress in
+          precision medicine.
+        </article>
       </section>
       <section class="references">
         <h2 class="section-h2">References</h2>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <article class="paragraph">
+          <ul>
+            <li>
+              Jumper, J., Evans, R., Pritzel, A., et al. (2021). Highly accurate protein structure
+              prediction with AlphaFold. Nature, 596, 583–589.
+              https://doi.org/10.1038/s41586-021-03819-2
+            </li>
+          </ul>
+        </article>
+        <hr />
       </section>
       <section class="footnotes">
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
-        <article class="paragraph"></article>
+        <article class="paragraph">
+          Stanford Data Ocean provides Stanford certificate training in precision medicine without
+          costs to anyone whose annual income is under $70,000 USD/ year. Apply for scholarship
+          here:
+          https://docs.google.com/forms/d/e/1FAIpQLSfi6ucNOQZwRLDjX_ZMScpkX-ct_p2i8ylP24JYoMlgR8Kz_Q/viewform
+        </article>
+        <article class="paragraph">
+          Disclaimer: This blog post is a summary and interpretation of the research article titled
+          "Highly accurate protein structure prediction with AlphaFold" published in Nature Journal.
+          The original study should be consulted for more detailed information.
+        </article>
       </section>
       <hr />
       <div class="social-links">
